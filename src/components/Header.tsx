@@ -27,10 +27,10 @@ const Header: React.FC = () => {
                     </a>
                 </nav>
 
-                {/* Let's Chat button */}
+                {/* Let&apos;s Chat button */}
                 <a href="#" className="px-6 py-3 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-full text-white text-base font-medium no-underline cursor-pointer
                                        transition-colors duration-300 hover:bg-opacity-20 hover:border-opacity-40">
-                    Let's Chat
+                    Let&apos;s Chat
                 </a>
             </div>
         </header>

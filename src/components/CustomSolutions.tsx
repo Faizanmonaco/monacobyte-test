@@ -66,7 +66,7 @@ const CustomSolutionsSection: React.FC = () => {
                 </h2>
                 {/* Description */}
                 <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto">
-                    Tell us what you need, and we'll create a custom AI to make your work faster and easier.
+                    Tell us what you need, and we&apos;ll create a custom AI to make your work faster and easier.
                 </p>
             </div>
 

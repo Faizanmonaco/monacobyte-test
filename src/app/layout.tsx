@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "../components/Header";
-import GoogleAnalytics from "../components/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: "MonacoByte",
@@ -15,10 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head />
       <body className="relative">
-        {/* Google Analytics client component */}
-        <GoogleAnalytics />
         <Header />
         <main>{children}</main>
       </body>

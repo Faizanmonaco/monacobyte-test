@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import Script from "next/script";
 
-const GA_MEASUREMENT_ID = "G-BB0H8H4NN0"; // replace with your ID
+const GA_MEASUREMENT_ID = "G-BB0H8H4NN0"; // <-- your GA ID
 
 export default function GoogleAnalytics() {
   const pathname = usePathname();
@@ -17,6 +17,7 @@ export default function GoogleAnalytics() {
 
   return (
     <>
+      {/* Load GA script */}
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}

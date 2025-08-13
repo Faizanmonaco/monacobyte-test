@@ -17,7 +17,8 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body className="relative">
-        <GoogleAnalytics /> {/* <-- GA tracking */}
+        {/* Google Analytics client component */}
+        <GoogleAnalytics />
         <Header />
         <main>{children}</main>
       </body>

@@ -6,35 +6,35 @@ export default function OurWorks() {
       title: "Lead Generation AI",
       description:
         "Increased leads by 230% for a real estate client using an AI sales assistant.",
-      img: "/placeholders/work1.jpg",
+      img: "/case-studies/study1.avif",
     },
     {
       title: "Customer Support Automation",
       description:
         "Reduced response time from 24 hours to instant replies for an e-commerce brand.",
-      img: "/placeholders/work2.jpg",
+      img: "/case-studies/study2.avif",
     },
     {
       title: "Appointment Booking AI",
       description:
         "Handled 90% of booking requests without human involvement for a service business.",
-      img: "/placeholders/work3.jpg",
+      img: "/case-studies/study3.avif",
     },
   ];
 
   return (
     <section className="bg-black py-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold tracking-tight text-white 900">
+          <h2 className="text-4xl font-bold tracking-tight text-white">
             Our Works
           </h2>
-          <p className="mt-4 text-lg text-white 600">Case Studies</p>
+          <p className="mt-4 text-lg text-gray-300">Case Studies</p>
         </div>
 
         {/* Case Studies Grid */}
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {works.map((work, i) => (
             <div
               key={i}
@@ -46,7 +46,7 @@ export default function OurWorks() {
                 alt={work.title}
                 width={500}
                 height={300}
-                className="object-cover w-full h-64 transform group-hover:scale-105 transition-transform duration-500"
+                className="object-cover w-full h-64 sm:h-72 md:h-64 lg:h-60 transform group-hover:scale-105 transition-transform duration-500"
               />
 
               {/* Overlay */}
@@ -55,7 +55,7 @@ export default function OurWorks() {
               {/* Text Content */}
               <div className="absolute bottom-6 left-6 right-6 text-white z-10">
                 <h3 className="text-2xl font-semibold">{work.title}</h3>
-                <p className="mt-2 text-sm">{work.description}</p>
+                <p className="mt-2 text-sm sm:text-base">{work.description}</p>
               </div>
             </div>
           ))}

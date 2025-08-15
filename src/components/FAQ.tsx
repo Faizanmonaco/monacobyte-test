@@ -2,25 +2,24 @@
 
 import { useState } from "react";
 
-// The FAQ data remains the same
 const faqs = [
-    {
-    question: "1. What Business Problems Can Sharpen AI Solve On Day One?",
+  {
+    question: "1. What Business Problems Can MonacoByte AI Solve On Day One?",
     answer:
-      "On day one, Sharpen AI can immediately handle tasks like 24/7 customer support, lead qualification, appointment scheduling, and answering common queries, freeing up your team to focus on more complex issues.",
+      "On day one, MonacoByte AI can immediately handle tasks like 24/7 customer support, lead qualification, appointment scheduling, and answering common queries, freeing up your team to focus on more complex issues.",
   },
   {
-    question: "2. How Fast Can Sharpen AI Deploy Voice Or WhatsApp Agent?",
+    question: "2. How Fast Can MonacoByte AI Deploy Voice Or WhatsApp Agent?",
     answer:
       "Deployment is swift. A standard agent can be up and running in a matter of days. More complex integrations may take a few weeks, but we prioritize a fast and efficient setup process to deliver value quickly.",
   },
   {
-    question: "3. Which Integrations Do Sharpen AI Agents Support?",
+    question: "3. Which Integrations Do MonacoByte AI Agents Support?",
     answer:
       "Our AI agents support a wide range of integrations with popular CRMs, helpdesks, calendar apps, and other business software. We also offer custom API integrations to fit your specific workflow.",
   },
   {
-    question: "4. What Is Sharpen AI's Pricing Model?",
+    question: "4. What Is MonacoByte AI's Pricing Model?",
     answer:
       "Our pricing is flexible and designed to scale with your business. We offer various plans based on usage and features, ensuring you only pay for what you need. Contact us for a custom quote.",
   },
@@ -30,7 +29,7 @@ const faqs = [
       "Absolutely. Businesses typically see a significant return on investment through increased efficiency, reduced operational costs, improved customer satisfaction, and the ability to scale support without proportional hiring.",
   },
   {
-    question: "6. How Does Sharpen AI Handle Data Protection And GDPR Compliance?",
+    question: "6. How Does MonacoByte AI Handle Data Protection And GDPR Compliance?",
     answer:
       "We take data security very seriously. All data is encrypted, and our platform is fully compliant with GDPR and other major data protection regulations to ensure your and your customers' data is always safe.",
   },
@@ -57,7 +56,7 @@ export default function FAQs() {
     <section className="bg-black/20 backdrop-blur-sm py-20">
       <div className="max-w-5xl mx-auto px-6 text-center mb-16">
         <div className="flex justify-center mb-4">
-          <span className="bg-[#1E2024] text-white text-sm font-semibold px-4 py-1 rounded-full">
+          <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-semibold px-4 py-1 rounded-full">
             Need to Know
           </span>
         </div>
@@ -70,25 +69,26 @@ export default function FAQs() {
         {faqs.map((faq, index) => (
           <div
             key={index}
-            // Add 'group' for hover states and apply conditional background colors
-            className={`group rounded-xl transition-colors duration-300 ${
-              openIndex === index ? 'bg-[#1E2024]' : 'bg-black hover:bg-[#1E2024]'
+            className={`group rounded-xl border border-white/20 backdrop-blur-lg bg-white/10 transition-all duration-300 shadow-lg ${
+              openIndex === index
+                ? "bg-white/15 border-white/30"
+                : "hover:bg-white/15 hover:border-white/30"
             }`}
           >
             <button
               onClick={() => toggleFAQ(index)}
               className="w-full py-5 px-6 flex justify-between items-center text-left focus:outline-none"
             >
-              {/* Question text with conditional color based on open and hover states */}
               <span
                 className={`flex-1 pr-4 font-semibold transition-colors duration-300 ${
-                  openIndex === index ? 'text-white' : 'text-gray-300 group-hover:text-white'
+                  openIndex === index
+                    ? "text-white"
+                    : "text-gray-200 group-hover:text-white"
                 }`}
               >
                 {faq.question}
               </span>
 
-              {/* Chevron Icon with matching color logic */}
               <span
                 className={`transform transition-transform duration-300 ${
                   openIndex === index ? "rotate-180" : ""
@@ -101,7 +101,9 @@ export default function FAQs() {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   className={`transition-colors duration-300 ${
-                    openIndex === index ? 'text-white' : 'text-gray-400 group-hover:text-white'
+                    openIndex === index
+                      ? "text-white"
+                      : "text-gray-300 group-hover:text-white"
                   }`}
                 >
                   <path
@@ -114,14 +116,13 @@ export default function FAQs() {
                 </svg>
               </span>
             </button>
-            
-            {/* The answer panel with its own transition */}
+
             <div
               className={`overflow-hidden transition-all duration-500 ease-in-out ${
                 openIndex === index ? "max-h-96" : "max-h-0"
               }`}
             >
-              <p className="pt-0 pb-5 px-6 text-gray-300">{faq.answer}</p>
+              <p className="pt-0 pb-5 px-6 text-gray-200">{faq.answer}</p>
             </div>
           </div>
         ))}

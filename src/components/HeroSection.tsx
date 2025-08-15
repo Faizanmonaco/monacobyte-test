@@ -1,9 +1,5 @@
 "use client";
 
-// We're replacing Next.js specific components with standard HTML elements to fix the compilation error.
-// The `Link` component is replaced with an `a` tag.
-// The `Image` component is replaced with a standard `img` tag.
-
 export default function HeroSection() {
   const logos = [
     { src: "/logos/client1.avif", alt: "Client 1 logo" },
@@ -16,17 +12,15 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative bg-black text-white overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24"
+      className="relative bg-black/20 backdrop-blur-sm text-white overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24"
       aria-labelledby="hero-heading"
     >
-      {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-black opacity-90"></div>
+      {/* Optional gradient overlay to help text stand out */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/30 to-black/40"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-
         {/* Small top text with pill shape and glow effect */}
-        <div className="inline-flex items-center gap-2 text-sm sm:text-base text-gray-400 font-medium mb-3 sm:mb-4 px-4 py-2 rounded-full border border-gray-700 bg-black animate-fade-in-down">
-          {/* Green glowing dot */}
+        <div className="inline-flex items-center gap-2 text-sm sm:text-base text-gray-300 font-medium mb-3 sm:mb-4 px-4 py-2 rounded-full border border-gray-700 bg-black/60 backdrop-blur-sm animate-fade-in-down">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
@@ -48,14 +42,11 @@ export default function HeroSection() {
           Build, grow, and scale your business with a team of AI employees.
         </p>
 
-        {/* CTA Button and sub-text */}
+        {/* CTA Button */}
         <div className="mt-8 flex flex-col items-center animate-fade-in-up delay-400">
           <a
             href="#"
-            className="inline-flex items-center justify-center bg-green-400 text-black font-extrabold py-3 px-8 rounded-full shadow-lg transition-all duration-300 hover:bg-green-500 transform hover:scale-105
-                             border border-green-400
-                             focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-opacity-75"
-            aria-label="Book a free strategy call"
+            className="inline-flex items-center justify-center bg-green-400 text-black font-extrabold py-3 px-8 rounded-full shadow-lg transition-all duration-300 hover:bg-green-500 transform hover:scale-105 border border-green-400 focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-opacity-75"
           >
             Book A Free Strategy Call
           </a>
@@ -66,8 +57,8 @@ export default function HeroSection() {
 
         {/* Disclaimer */}
         <p className="mt-3 text-xs sm:text-sm text-gray-500 max-w-sm mx-auto animate-fade-in-up delay-600">
-          <span className="text-yellow-400 mr-1">&#9888;</span>Disclaimer: This is not a sales call, but a <span className="font-bold">Free</span> consultation
-          on how you can start using AI in your business.
+          <span className="text-yellow-400 mr-1">&#9888;</span>Disclaimer: This is not a sales call, but a{" "}
+          <span className="font-bold">Free</span> consultation on how you can start using AI in your business.
         </p>
 
         {/* "Our employees are already helping:" text */}
@@ -77,9 +68,7 @@ export default function HeroSection() {
 
         {/* Smooth Infinite Logo Marquee */}
         <div className="mt-8 overflow-hidden py-4 relative">
-          {/* Marquee Track */}
           <div className="flex w-full animate-marquee">
-            {/* First set of logos */}
             <div className="flex flex-shrink-0">
               {logos.map((logo, i) => (
                 <div key={`first-${i}`} className="flex-shrink-0 px-8 opacity-70 hover:opacity-100 transition-opacity duration-300">
@@ -93,7 +82,6 @@ export default function HeroSection() {
                 </div>
               ))}
             </div>
-            {/* Second set of logos */}
             <div className="flex flex-shrink-0">
               {logos.map((logo, i) => (
                 <div key={`second-${i}`} className="flex-shrink-0 px-8 opacity-70 hover:opacity-100 transition-opacity duration-300">
@@ -108,12 +96,6 @@ export default function HeroSection() {
               ))}
             </div>
           </div>
-
-          {/* Left fade */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black from-40% to-transparent z-10" />
-
-          {/* Right fade */}
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black from-40% to-transparent z-10" />
         </div>
       </div>
     </section>

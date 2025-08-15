@@ -6,7 +6,7 @@ export default function OurMission() {
   return (
     <section
       id="our-mission"
-      className="bg-black text-white py-20 px-6 text-center"
+      className="bg-black/20 backdrop-blur-sm text-white py-20 px-6 text-center"
     >
       {/* Label */}
       <div className="inline-block px-4 py-1 mb-6 rounded-full bg-neutral-900 text-sm font-medium border border-neutral-800">

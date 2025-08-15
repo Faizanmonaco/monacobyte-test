@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "../components/Header";
+import DarkVeil from "../components/DarkVeil";
 
 export const metadata: Metadata = {
   title: "MonacoByte",
@@ -14,7 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="relative">
+      <body className="relative bg-black text-white">
+        {/* DarkVeil background */}
+        <div className="fixed inset-0 -z-10">
+          <DarkVeil />
+        </div>
+
         <Header />
         <main>{children}</main>
       </body>

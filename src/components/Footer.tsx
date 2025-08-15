@@ -4,7 +4,7 @@ import { FaYoutube, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white py-12 px-6 lg:px-8">
+    <footer className="bg-black/20 backdrop-blur-sm text-white py-12 px-6 lg:px-8">
       <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
         {/* Brand/Logo Section */}
         <div className="mb-8">

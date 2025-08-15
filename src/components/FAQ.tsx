@@ -54,7 +54,7 @@ export default function FAQs() {
   };
 
   return (
-    <section className="bg-black py-20">
+    <section className="bg-black/20 backdrop-blur-sm py-20">
       <div className="max-w-5xl mx-auto px-6 text-center mb-16">
         <div className="flex justify-center mb-4">
           <span className="bg-[#1E2024] text-white text-sm font-semibold px-4 py-1 rounded-full">

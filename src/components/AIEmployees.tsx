@@ -16,14 +16,14 @@ const EMPLOYEES: Employee[] = [
   { name: "Ringo", role: "AI Cold Caller", image: "/avatars/ringo.png" },
   { name: "Orion", role: "Booking Manager", image: "/avatars/orion.png" },
   { name: "Benji", role: "Personal Assistant", image: "/avatars/benji.png" },
-  { name: "Adam", role: "Customer Support Manager", image: "/avatars/adam.png" },
+  { name: "Adam", "role": "Customer Support Manager", image: "/avatars/adam.png" },
 ];
 
 const LOOPED_EMPLOYEES = [...EMPLOYEES, ...EMPLOYEES, ...EMPLOYEES];
 
 export default function AIEmployees() {
   const trackRef = useRef<HTMLDivElement>(null);
-  const isTransitioning = useRef(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [activeIndex, setActiveIndex] = useState(EMPLOYEES.length);
 
   const CARD_WIDTH = 320;
@@ -31,43 +31,61 @@ export default function AIEmployees() {
   const STEP = CARD_WIDTH + GAP;
 
   const handleNav = (dir: "left" | "right") => {
-    if (isTransitioning.current) return;
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setActiveIndex((prev) => prev + (dir === "left" ? -1 : 1));
   };
 
   useEffect(() => {
     if (!trackRef.current) return;
     const scrollContainer = trackRef.current;
-    const scrollLeft = activeIndex * STEP - (scrollContainer.clientWidth - CARD_WIDTH) / 2;
 
-    scrollContainer.scrollTo({ left: scrollLeft, behavior: "smooth" });
-    isTransitioning.current = true;
+    const scrollPosition =
+      activeIndex * STEP - (scrollContainer.clientWidth - CARD_WIDTH) / 2;
 
-    const transitionEnd = () => {
-      isTransitioning.current = false;
+    scrollContainer.scrollTo({ left: scrollPosition, behavior: "smooth" });
+
+    // Handle transition end for the infinite loop
+    const onScrollEnd = () => {
+      setIsTransitioning(false);
+      
+      let newIndex = activeIndex;
       if (activeIndex < EMPLOYEES.length) {
-        const newIndex = activeIndex + EMPLOYEES.length;
-        setActiveIndex(newIndex);
-        scrollContainer.scrollTo({
-          left: newIndex * STEP - (scrollContainer.clientWidth - CARD_WIDTH) / 2,
-          behavior: "instant" as ScrollBehavior,
-        });
+        newIndex = activeIndex + EMPLOYEES.length;
       } else if (activeIndex >= EMPLOYEES.length * 2) {
-        const newIndex = activeIndex - EMPLOYEES.length;
+        newIndex = activeIndex - EMPLOYEES.length;
+      }
+      
+      if (newIndex !== activeIndex) {
         setActiveIndex(newIndex);
         scrollContainer.scrollTo({
           left: newIndex * STEP - (scrollContainer.clientWidth - CARD_WIDTH) / 2,
           behavior: "instant" as ScrollBehavior,
         });
       }
+      scrollContainer.removeEventListener("scroll", onScrollEnd);
     };
 
-    const timer = setTimeout(transitionEnd, 500);
-    return () => clearTimeout(timer);
+    // Use a short delay to check if scrolling has stopped
+    let timeout: NodeJS.Timeout;
+    const handleScroll = () => {
+        clearTimeout(timeout);
+        timeout = setTimeout(onScrollEnd, 150);
+    };
+
+    scrollContainer.addEventListener("scroll", handleScroll, { once: true });
+
+    return () => {
+      clearTimeout(timeout);
+      scrollContainer.removeEventListener("scroll", handleScroll);
+    };
   }, [activeIndex, STEP]);
 
   return (
-    <section id="ai-employees" className="bg-black text-white py-28 overflow-hidden">
+    <section
+      id="ai-employees"
+      className="bg-black/20 backdrop-blur-sm text-white overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24"
+    >
       <div className="max-w-7xl mx-auto px-6">
         {/* Headings */}
         <div className="text-center mb-20">
@@ -83,17 +101,22 @@ export default function AIEmployees() {
         <div className="relative">
           <div
             ref={trackRef}
-            className="flex items-center gap-6 overflow-x-hidden py-6 -mb-6 scroll-smooth"
+            className="flex items-center gap-6 overflow-x-hidden py-6 -mb-6"
           >
             {LOOPED_EMPLOYEES.map((emp, i) => {
-              const isActive = i === activeIndex;
+              const isCenter = i === activeIndex;
+
               return (
                 <div
                   key={`${emp.name}-${i}`}
-                  className={`flex-shrink-0 w-80 rounded-2xl p-8 text-center transition-all duration-500 ease-in-out
-                    ${isActive ? "scale-105 opacity-100" : "scale-90 opacity-50"}`}
+                  className={`flex-shrink-0 w-80 rounded-2xl p-8 text-center transition-all duration-500 ease-in-out ${
+                    isCenter
+                      ? "scale-105 opacity-100"
+                      : "scale-90 opacity-50"
+                  }`}
                   style={{
-                    background: "linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%)",
+                    background:
+                      "linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%)",
                   }}
                 >
                   <div className="relative mx-auto mb-6 h-64 w-64">
@@ -115,22 +138,18 @@ export default function AIEmployees() {
             })}
           </div>
 
-          {/* Left fade */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-black to-transparent z-10" />
-
-          {/* Right fade */}
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-black to-transparent z-10" />
-
           {/* Arrows */}
           <button
             onClick={() => handleNav("left")}
-            className="absolute left-0 sm:left-4 top-1/2 -translate-y-1/2 z-20 text-white hover:opacity-75 transition-opacity"
+            disabled={isTransitioning}
+            className="absolute left-0 sm:left-4 top-1/2 -translate-y-1/2 z-20 text-white hover:opacity-75 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <ChevronLeft className="h-10 w-10" />
           </button>
           <button
             onClick={() => handleNav("right")}
-            className="absolute right-0 sm:right-4 top-1/2 -translate-y-1/2 z-20 text-white hover:opacity-75 transition-opacity"
+            disabled={isTransitioning}
+            className="absolute right-0 sm:right-4 top-1/2 -translate-y-1/2 z-20 text-white hover:opacity-75 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <ChevronRight className="h-10 w-10" />
           </button>

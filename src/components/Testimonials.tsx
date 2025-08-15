@@ -42,7 +42,7 @@ export default function Testimonials() {
   const looped = [...testimonials, ...testimonials];
 
   return (
-    <section className="bg-black py-20">
+    <section className="bg-black/20 backdrop-blur-sm py-20">
       {/* CSS for the marquee animation */}
       <style>{`
         @keyframes marquee {

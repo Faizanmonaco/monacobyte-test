@@ -3,7 +3,7 @@ import React from 'react';
 // Main App component to demonstrate the CustomSolutionsSection
 const App: React.FC = () => {
     return (
-        <div className="min-h-screen bg-black flex flex-col items-center py-16 px-4 md:px-8 lg:px-16">
+        <div className="min-h-screen bg-black/20 backdrop-blur-sm flex flex-col items-center py-16 px-4 md:px-8 lg:px-16">
             <CustomSolutionsSection />
         </div>
     );
